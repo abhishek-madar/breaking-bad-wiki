@@ -1,462 +1,327 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Breaking Bad — The Full Story</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Dancing+Script:wght@600;700&family=Merriweather:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="background-system" aria-hidden="true">
-      <div id="matrix-scene">
-        <div id="matrix-pt"></div>
-        <div id="matrix-sl"></div>
-        <div id="matrix-hw"></div>
-        <div id="matrix-cg"></div>
-        <div id="matrix-atoms"></div>
-        <div id="matrix-vg"></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cook </title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Dancing+Script:wght@600;700&family=Merriweather:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%235aaa3a'/><text x='50' y='68' font-family='serif' font-weight='900' font-size='50' text-anchor='middle' fill='white'>[Ab]</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="background-system" aria-hidden="true">
+  <div id="matrix-scene">
+    <div id="matrix-pt"></div>
+    <div id="matrix-sl"></div>
+    <div id="matrix-hw"></div>
+    <div id="matrix-cg"></div>
+    <div id="matrix-atoms"></div>
+    <div id="matrix-vg"></div>
+  </div>
+</div>
+
+<div id="mobile-notice" class="mobile-notice" aria-live="polite">
+  <div class="mn-content">
+    <div class="mn-icon">⚠</div>
+    <div class="mn-text">Scale matters. For professional excellence, switch to Desktop.</div>
+    <button class="mn-close" onclick="dismissNotice()" aria-label="Dismiss notice">Cancel</button>
+  </div>
+</div>
+
+<div class="film-grain" aria-hidden="true"><svg><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<div id="intro" role="presentation" aria-label="Intro animation">
+  <canvas id="intro-sparks" aria-hidden="true"></canvas>
+  <div class="intro-container">
+
+
+    <div class="intro-title">
+      <span class="elem-box" style="animation-delay:1.5s">
+        <span class="eb-head"><span class="eb-num">35</span> <span class="eb-label">Br</span></span>
+        <span class="eb-big">Br</span>
+        <span class="eb-wt">79.9</span>
+      </span>
+      <span class="intro-lt" style="animation-delay:2.2s">e</span><span class="intro-lt" style="animation-delay:2.35s">a</span><span class="intro-lt" style="animation-delay:2.5s">k</span><span class="intro-lt" style="animation-delay:2.65s">i</span><span class="intro-lt" style="animation-delay:2.8s">n</span><span class="intro-lt" style="animation-delay:2.95s">g</span>
+      <span class="intro-gap"></span>
+      <span class="elem-box" style="animation-delay:4.5s">
+        <span class="eb-head"><span class="eb-num">56</span> <span class="eb-label">Ba</span></span>
+        <span class="eb-big">Ba</span>
+        <span class="eb-wt">137.3</span>
+      </span>
+      <span class="intro-lt" style="animation-delay:5.2s">d</span>
+    </div>
+    <div class="intro-credits" style="animation-delay:7.5s">AMC &nbsp;·&nbsp; 2008–2013 &nbsp;·&nbsp; VINCE GILLIGAN</div>
+    <div class="intro-seasons">
+      <span class="intro-sn" style="animation-delay:9.5s">S1</span><span class="intro-dot" style="animation-delay:9.65s">·</span>
+      <span class="intro-sn" style="animation-delay:9.8s">S2</span><span class="intro-dot" style="animation-delay:9.95s">·</span>
+      <span class="intro-sn" style="animation-delay:10.1s">S3</span><span class="intro-dot" style="animation-delay:10.25s">·</span>
+      <span class="intro-sn" style="animation-delay:10.4s">S4</span><span class="intro-dot" style="animation-delay:10.55s">·</span>
+      <span class="intro-sn" style="animation-delay:10.7s">S5</span>
+    </div>
+    <div class="intro-skip" onclick="skipIntro()">[ SKIP INTRO ]</div>
+  </div>
+</div>
+
+<nav aria-label="Main Navigation">
+  <div class="nav-logo" aria-hidden="true">Breaking Bad<span>.</span></div>
+  <ul class="nav-links" role="menubar">
+    <li role="none"><a href="#seasons" role="menuitem">Seasons</a></li>
+    <li role="none"><a href="#characters" role="menuitem">Characters</a></li>
+    <li role="none"><a href="#awards" role="menuitem">Awards</a></li>
+    <li role="none"><a href="#dialogues" role="menuitem">Dialogues</a></li>
+  </ul>
+</nav>
+
+<section id="hero" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow sr-up" style="transition-delay: 0.1s;">The Complete Series</div>
+    <div class="hero-title-container sr-up" style="transition-delay: 0.3s;">
+      <h1 id="hero-title" class="hero-main-title">
+        <span class="hero-elem-box">
+          <span class="eb-head"><span class="eb-num">35</span> <span class="eb-label">Br</span></span>
+          <span class="eb-big">Br</span>
+          <span class="eb-wt">79.9</span>
+        </span>eaking
+        <span class="hero-gap"></span>
+        <span class="hero-elem-box">
+          <span class="eb-head"><span class="eb-num">56</span> <span class="eb-label">Ba</span></span>
+          <span class="eb-big">Ba</span>
+          <span class="eb-wt">137.3</span>
+        </span>d
+      </h1>
+    </div>
+    <p class="hero-desc sr-up" style="transition-delay: 0.5s;">A high school chemistry teacher diagnosed with terminal cancer turns to producing methamphetamine to secure his family's financial future.</p>
+    <div class="hero-stats sr-up" style="transition-delay: 0.7s;">
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Seasons</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">62</div>
+        <div class="hero-stat-label">Episodes</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">16</div>
+        <div class="hero-stat-label">Emmys Won</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">9.5</div>
+        <div class="hero-stat-label">IMDb Rating</div>
+      </div>
+    </div>
+    <div class="hero-scroll sr-up" style="transition-delay: 0.9s;" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <div class="scroll-label">Scroll</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item">Say My Name</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Am The Danger</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Yeah, Science!</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Better Call Saul</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Stay Out Of My Territory</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Am The One Who Knocks</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Did It For Me</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Wire In The Blood</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Say My Name</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Am The Danger</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Yeah, Science!</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Better Call Saul</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Stay Out Of My Territory</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Am The One Who Knocks</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">I Did It For Me</span><span class="ticker-sep">◆</span>
+    <span class="ticker-item">Wire In The Blood</span><span class="ticker-sep">◆</span>
+  </div>
+</div>
+
+
+<div id="sticky-quotes" aria-label="Iconic Quotes Scroll Theater">
+  <div class="sq-container">
+    <div class="sq-quote sq-q1">"I am the one who knocks."</div>
+    <div class="sq-quote sq-q2">"Say my name."</div>
+    <div class="sq-quote sq-q3">"Yeah, science!"</div>
+    <div class="sq-quote sq-q4">"I am the danger."</div>
+    <div class="sq-progress-dots" aria-hidden="true">
+      <div class="sq-dot active"></div>
+      <div class="sq-dot"></div>
+      <div class="sq-dot"></div>
+      <div class="sq-dot"></div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker-divider td-green">
+  <div class="ticker-track">
+    <span class="td-text">I Am The One Who Knocks</span><span class="td-dot">⬡</span>
+    <span class="td-text">Say My Name</span><span class="td-dot">⬡</span>
+    <span class="td-text">Yeah, Science!</span><span class="td-dot">⬡</span>
+    <span class="td-text">Stay Out Of My Territory</span><span class="td-dot">⬡</span>
+    <span class="td-text">Tread Lightly</span><span class="td-dot">⬡</span>
+    <span class="td-text">I Am The Danger</span><span class="td-dot">⬡</span>
+    <span class="td-text">I Am The One Who Knocks</span><span class="td-dot">⬡</span>
+    <span class="td-text">Say My Name</span><span class="td-dot">⬡</span>
+    <span class="td-text">Yeah, Science!</span><span class="td-dot">⬡</span>
+    <span class="td-text">Stay Out Of My Territory</span><span class="td-dot">⬡</span>
+    <span class="td-text">Tread Lightly</span><span class="td-dot">⬡</span>
+    <span class="td-text">I Am The Danger</span><span class="td-dot">⬡</span>
+  </div>
+</div>
+
+<section id="seasons" aria-labelledby="seasons-title">
+  <div class="section-label sr-left">Season Guide</div>
+  <h2 id="seasons-title" class="section-title sr-left">All <span>Seasons</span></h2>
+  <div class="divider sr-scale"></div>
+  <div class="seasons-tabs sr-up" id="seasons-tabs" role="tablist"></div>
+  <div id="seasons-content" aria-live="polite"></div>
+</section>
+
+<div class="ticker-divider td-rust">
+  <div class="ticker-track ticker-reverse">
+    <span class="td-text">Better Call Saul</span><span class="td-dot">◈</span>
+    <span class="td-text">I Did It For Me</span><span class="td-dot">◈</span>
+    <span class="td-text">No Half Measures</span><span class="td-dot">◈</span>
+    <span class="td-text">Wire In The Blood</span><span class="td-dot">◈</span>
+    <span class="td-text">Crystal Blue Persuasion</span><span class="td-dot">◈</span>
+    <span class="td-text">The Empire Business</span><span class="td-dot">◈</span>
+    <span class="td-text">Better Call Saul</span><span class="td-dot">◈</span>
+    <span class="td-text">I Did It For Me</span><span class="td-dot">◈</span>
+    <span class="td-text">No Half Measures</span><span class="td-dot">◈</span>
+    <span class="td-text">Wire In The Blood</span><span class="td-dot">◈</span>
+    <span class="td-text">Crystal Blue Persuasion</span><span class="td-dot">◈</span>
+    <span class="td-text">The Empire Business</span><span class="td-dot">◈</span>
+  </div>
+</div>
+
+<section id="characters" aria-labelledby="chars-title">
+  <div class="section-label sr-left">Cast &amp; Characters</div>
+  <h2 id="chars-title" class="section-title sr-left"><span>Character</span> Profiles</h2>
+  <div class="divider sr-scale"></div>
+  <div class="chars-grid sr-up" id="chars-grid"></div>
+</section>
+
+<div class="ticker-divider td-yellow">
+  <div class="ticker-track">
+    <span class="td-text">Heisenberg</span><span class="td-dot">⬢</span>
+    <span class="td-text">99.1% Pure</span><span class="td-dot">⬢</span>
+    <span class="td-text">Los Pollos Hermanos</span><span class="td-dot">⬢</span>
+    <span class="td-text">Gray Matter</span><span class="td-dot">⬢</span>
+    <span class="td-text">Vamonos Pest</span><span class="td-dot">⬢</span>
+    <span class="td-text">Madrigal Electromotive</span><span class="td-dot">⬢</span>
+    <span class="td-text">Heisenberg</span><span class="td-dot">⬢</span>
+    <span class="td-text">99.1% Pure</span><span class="td-dot">⬢</span>
+    <span class="td-text">Los Pollos Hermanos</span><span class="td-dot">⬢</span>
+    <span class="td-text">Gray Matter</span><span class="td-dot">⬢</span>
+    <span class="td-text">Vamonos Pest</span><span class="td-dot">⬢</span>
+    <span class="td-text">Madrigal Electromotive</span><span class="td-dot">⬢</span>
+  </div>
+</div>
+
+<section id="awards" class="page-section" aria-labelledby="awards-title">
+  <div class="recog-label sr-left">Recognition</div>
+  <h2 id="awards-title" class="hero-heading sr-left">Emmy Awards <span>Hall</span></h2>
+  <div class="accent-line sr-scale"></div>
+  
+  <div class="awards-ticker-container">
+    <div id="emmy-list" class="award-ticker-track"></div>
+  </div>
+</section>
+
+<div class="ticker-divider td-blue">
+  <div class="ticker-track ticker-reverse">
+    <span class="td-text">Hi, I am Gustavo, but you may call me Gus. I am a man of certain resources. Let us see if we can reach an agreement.</span><span class="td-dot">⬢</span>
+    <span class="td-text">Hi, I am Gustavo, but you may call me Gus. I am a man of certain resources. Let us see if we can reach an agreement.</span><span class="td-dot">⬢</span>
+  </div>
+</div>
+
+<section id="dialogues" aria-labelledby="dialogues-title">
+  <div class="section-label sr-up">Iconic Lines</div>
+  <h2 id="dialogues-title" class="section-title sr-up">Famous <span>Dialogues</span></h2>
+  <div class="divider sr-scale"></div>
+  <div class="dialogue-grid sr-up" id="dialogues-grid"></div>
+</section>
+
+<div class="ticker-divider td-rust">
+  <div class="ticker-track">
+    <span class="td-text">I did it for me. I was good at it. And I was... I was alive.</span><span class="td-dot">⬢</span>
+    <span class="td-text">I did it for me. I was good at it. And I was... I was alive.</span><span class="td-dot">⬢</span>
+    <span class="td-text">I did it for me. I was good at it. And I was... I was alive.</span><span class="td-dot">⬢</span>
+  </div>
+</div>
+
+<footer class="premium-footer">
+  <div class="footer-blueprint-grid"></div>
+  
+  <div class="footer-main-container">
+    <div class="footer-grid-new">
+      <div class="footer-section brand-col">
+        <div class="footer-logo-premium">Breaking Bad</div>
+        <p class="footer-bio">A story of transformation. A legacy of chemical perfection. The definitive fan experience for television's greatest drama.</p>
+        <div class="footer-location">
+          <span class="loc-dot"></span> Albuquerque, New Mexico
+        </div>
+      </div>
+
+      <div class="footer-section nav-col">
+        <h4 class="footer-title">Navigation</h4>
+        <ul class="footer-nav-list">
+          <li><a href="#seasons">Seasons</a></li>
+          <li><a href="#characters">Characters</a></li>
+          <li><a href="#awards">Awards</a></li>
+          <li><a href="#dialogues">Dialogues</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section social-col">
+        <h4 class="footer-title">Network</h4>
+        <div class="social-grid-premium">
+          <a href="https://x.com/Abhishek_madar_" class="social-element-new element-x" data-label="Twitter / X">
+            <span class="se-num">1</span>
+            <span class="se-sym">X</span>
+            <span class="se-mass">20.24</span>
+            <span class="se-cat">X</span>
+          </a>
+          <a href="https://www.youtube.com/@abhishek_badagi_03" class="social-element-new element-y" data-label="YouTube">
+            <span class="se-num">39</span>
+            <span class="se-sym">Y</span>
+            <span class="se-mass">88.90</span>
+            <span class="se-cat">YouTube</span>
+          </a>
+          <a href="https://www.instagram.com/abhishek_badagi_/" class="social-element-new element-in" data-label="Instagram">
+            <span class="se-num">49</span>
+            <span class="se-sym">In</span>
+            <span class="se-mass">114.8</span>
+            <span class="se-cat">Instagram</span>
+          </a>
+        </div>
+        <a href="https://www.netflix.com/title/70143825" target="_blank" class="footer-watch-link">
+          <span class="fwl-play">▶</span> watch now
+        </a>
       </div>
     </div>
 
-    <div id="mobile-notice" class="mobile-notice" aria-live="polite">
-      <div class="mn-content">
-        <div class="mn-icon">⚠</div>
-        <div class="mn-text">
-          Scale matters. For professional excellence, switch to Desktop.
-        </div>
-        <button
-          class="mn-close"
-          onclick="dismissNotice()"
-          aria-label="Dismiss notice"
-        >
-          Cancel
-        </button>
+    <div class="footer-divider-premium"></div>
+
+    <div class="footer-bottom-new">
+      <div class="legal-wrap">
+        <span class="copyright">© 2026 Breaking Bad Experience</span>
+        <span class="legal-sep">|</span>
+        <span class="fan-project">A Professional Fan Project</span>
+      </div>
+      
+      <div class="footer-actions">
+        <div class="heisenberg-signature">I’m the cook</div>
       </div>
     </div>
+  </div>
+</footer>
 
-    <div class="film-grain" aria-hidden="true">
-      <svg>
-        <filter id="grain">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.65"
-            numOctaves="3"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#grain)" />
-      </svg>
-    </div>
-    <canvas id="particles-canvas" aria-hidden="true"></canvas>
-
-    <div id="intro" role="presentation" aria-label="Intro animation">
-      <canvas id="intro-sparks" aria-hidden="true"></canvas>
-      <div class="intro-container">
-        <div class="intro-title">
-          <span class="elem-box" style="animation-delay: 1.5s">
-            <span class="eb-head"
-              ><span class="eb-num">35</span>
-              <span class="eb-label">Br</span></span
-            >
-            <span class="eb-big">Br</span>
-            <span class="eb-wt">79.9</span>
-          </span>
-          <span class="intro-lt" style="animation-delay: 2.2s">e</span
-          ><span class="intro-lt" style="animation-delay: 2.35s">a</span
-          ><span class="intro-lt" style="animation-delay: 2.5s">k</span
-          ><span class="intro-lt" style="animation-delay: 2.65s">i</span
-          ><span class="intro-lt" style="animation-delay: 2.8s">n</span
-          ><span class="intro-lt" style="animation-delay: 2.95s">g</span>
-          <span class="intro-gap"></span>
-          <span class="elem-box" style="animation-delay: 4.5s">
-            <span class="eb-head"
-              ><span class="eb-num">56</span>
-              <span class="eb-label">Ba</span></span
-            >
-            <span class="eb-big">Ba</span>
-            <span class="eb-wt">137.3</span>
-          </span>
-          <span class="intro-lt" style="animation-delay: 5.2s">d</span>
-        </div>
-        <div class="intro-credits" style="animation-delay: 7.5s">
-          AMC &nbsp;·&nbsp; 2008–2013 &nbsp;·&nbsp; VINCE GILLIGAN
-        </div>
-        <div class="intro-seasons">
-          <span class="intro-sn" style="animation-delay: 9.5s">S1</span
-          ><span class="intro-dot" style="animation-delay: 9.65s">·</span>
-          <span class="intro-sn" style="animation-delay: 9.8s">S2</span
-          ><span class="intro-dot" style="animation-delay: 9.95s">·</span>
-          <span class="intro-sn" style="animation-delay: 10.1s">S3</span
-          ><span class="intro-dot" style="animation-delay: 10.25s">·</span>
-          <span class="intro-sn" style="animation-delay: 10.4s">S4</span
-          ><span class="intro-dot" style="animation-delay: 10.55s">·</span>
-          <span class="intro-sn" style="animation-delay: 10.7s">S5</span>
-        </div>
-        <div class="intro-skip" onclick="skipIntro()">[ SKIP INTRO ]</div>
-      </div>
-    </div>
-
-    <nav aria-label="Main Navigation">
-      <div class="nav-logo" aria-hidden="true">Breaking Bad<span>.</span></div>
-      <ul class="nav-links" role="menubar">
-        <li role="none"><a href="#seasons" role="menuitem">Seasons</a></li>
-        <li role="none">
-          <a href="#characters" role="menuitem">Characters</a>
-        </li>
-        <li role="none"><a href="#awards" role="menuitem">Awards</a></li>
-        <li role="none"><a href="#dialogues" role="menuitem">Dialogues</a></li>
-      </ul>
-    </nav>
-
-    <section id="hero" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="hero-eyebrow sr-up" style="transition-delay: 0.1s">
-          The Complete Series
-        </div>
-        <div class="hero-title-container sr-up" style="transition-delay: 0.3s">
-          <h1 id="hero-title" class="hero-main-title">
-            <span class="hero-elem-box">
-              <span class="eb-head"
-                ><span class="eb-num">35</span>
-                <span class="eb-label">Br</span></span
-              >
-              <span class="eb-big">Br</span>
-              <span class="eb-wt">79.9</span> </span
-            >eaking
-            <span class="hero-gap"></span>
-            <span class="hero-elem-box">
-              <span class="eb-head"
-                ><span class="eb-num">56</span>
-                <span class="eb-label">Ba</span></span
-              >
-              <span class="eb-big">Ba</span>
-              <span class="eb-wt">137.3</span> </span
-            >d
-          </h1>
-        </div>
-        <p class="hero-desc sr-up" style="transition-delay: 0.5s">
-          A high school chemistry teacher diagnosed with terminal cancer turns
-          to producing methamphetamine to secure his family's financial future.
-        </p>
-        <div class="hero-stats sr-up" style="transition-delay: 0.7s">
-          <div class="hero-stat">
-            <div class="hero-stat-num">5</div>
-            <div class="hero-stat-label">Seasons</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">62</div>
-            <div class="hero-stat-label">Episodes</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">16</div>
-            <div class="hero-stat-label">Emmys Won</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">9.5</div>
-            <div class="hero-stat-label">IMDb Rating</div>
-          </div>
-        </div>
-        <div
-          class="hero-scroll sr-up"
-          style="transition-delay: 0.9s"
-          aria-hidden="true"
-        >
-          <div class="scroll-line"></div>
-          <div class="scroll-label">Scroll</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="ticker">
-      <div class="ticker-inner" id="ticker">
-        <span class="ticker-item">Say My Name</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Am The Danger</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Yeah, Science!</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Better Call Saul</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Stay Out Of My Territory</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Am The One Who Knocks</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Did It For Me</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Wire In The Blood</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Say My Name</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Am The Danger</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Yeah, Science!</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Better Call Saul</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Stay Out Of My Territory</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Am The One Who Knocks</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">I Did It For Me</span
-        ><span class="ticker-sep">◆</span>
-        <span class="ticker-item">Wire In The Blood</span
-        ><span class="ticker-sep">◆</span>
-      </div>
-    </div>
-
-    <div id="sticky-quotes" aria-label="Iconic Quotes Scroll Theater">
-      <div class="sq-container">
-        <div class="sq-quote sq-q1">"I am the one who knocks."</div>
-        <div class="sq-quote sq-q2">"Say my name."</div>
-        <div class="sq-quote sq-q3">"Yeah, science!"</div>
-        <div class="sq-quote sq-q4">"I am the danger."</div>
-        <div class="sq-progress-dots" aria-hidden="true">
-          <div class="sq-dot active"></div>
-          <div class="sq-dot"></div>
-          <div class="sq-dot"></div>
-          <div class="sq-dot"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ticker-divider td-green">
-      <div class="ticker-track">
-        <span class="td-text">I Am The One Who Knocks</span
-        ><span class="td-dot">⬡</span> <span class="td-text">Say My Name</span
-        ><span class="td-dot">⬡</span>
-        <span class="td-text">Yeah, Science!</span><span class="td-dot">⬡</span>
-        <span class="td-text">Stay Out Of My Territory</span
-        ><span class="td-dot">⬡</span> <span class="td-text">Tread Lightly</span
-        ><span class="td-dot">⬡</span>
-        <span class="td-text">I Am The Danger</span
-        ><span class="td-dot">⬡</span>
-        <span class="td-text">I Am The One Who Knocks</span
-        ><span class="td-dot">⬡</span> <span class="td-text">Say My Name</span
-        ><span class="td-dot">⬡</span>
-        <span class="td-text">Yeah, Science!</span><span class="td-dot">⬡</span>
-        <span class="td-text">Stay Out Of My Territory</span
-        ><span class="td-dot">⬡</span> <span class="td-text">Tread Lightly</span
-        ><span class="td-dot">⬡</span>
-        <span class="td-text">I Am The Danger</span
-        ><span class="td-dot">⬡</span>
-      </div>
-    </div>
-
-    <section id="seasons" aria-labelledby="seasons-title">
-      <div class="section-label sr-left">Season Guide</div>
-      <h2 id="seasons-title" class="section-title sr-left">
-        All <span>Seasons</span>
-      </h2>
-      <div class="divider sr-scale"></div>
-      <div class="seasons-tabs sr-up" id="seasons-tabs" role="tablist"></div>
-      <div id="seasons-content" aria-live="polite"></div>
-    </section>
-
-    <div class="ticker-divider td-rust">
-      <div class="ticker-track ticker-reverse">
-        <span class="td-text">Better Call Saul</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">I Did It For Me</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">No Half Measures</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">Wire In The Blood</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">Crystal Blue Persuasion</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">The Empire Business</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">Better Call Saul</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">I Did It For Me</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">No Half Measures</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">Wire In The Blood</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">Crystal Blue Persuasion</span
-        ><span class="td-dot">◈</span>
-        <span class="td-text">The Empire Business</span
-        ><span class="td-dot">◈</span>
-      </div>
-    </div>
-
-    <section id="characters" aria-labelledby="chars-title">
-      <div class="section-label sr-left">Cast &amp; Characters</div>
-      <h2 id="chars-title" class="section-title sr-left">
-        <span>Character</span> Profiles
-      </h2>
-      <div class="divider sr-scale"></div>
-      <div class="chars-grid sr-up" id="chars-grid"></div>
-    </section>
-
-    <div class="ticker-divider td-yellow">
-      <div class="ticker-track">
-        <span class="td-text">Heisenberg</span><span class="td-dot">⬢</span>
-        <span class="td-text">99.1% Pure</span><span class="td-dot">⬢</span>
-        <span class="td-text">Los Pollos Hermanos</span
-        ><span class="td-dot">⬢</span> <span class="td-text">Gray Matter</span
-        ><span class="td-dot">⬢</span> <span class="td-text">Vamonos Pest</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text">Madrigal Electromotive</span
-        ><span class="td-dot">⬢</span> <span class="td-text">Heisenberg</span
-        ><span class="td-dot">⬢</span> <span class="td-text">99.1% Pure</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text">Los Pollos Hermanos</span
-        ><span class="td-dot">⬢</span> <span class="td-text">Gray Matter</span
-        ><span class="td-dot">⬢</span> <span class="td-text">Vamonos Pest</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text">Madrigal Electromotive</span
-        ><span class="td-dot">⬢</span>
-      </div>
-    </div>
-
-    <section id="awards" class="page-section" aria-labelledby="awards-title">
-      <div class="recog-label sr-left">Recognition</div>
-      <h2 id="awards-title" class="hero-heading sr-left">
-        Emmy Awards <span>Hall</span>
-      </h2>
-      <div class="accent-line sr-scale"></div>
-
-      <div class="awards-ticker-container">
-        <div id="emmy-list" class="award-ticker-track"></div>
-      </div>
-    </section>
-
-    <div class="ticker-divider td-blue">
-      <div class="ticker-track ticker-reverse">
-        <span class="td-text"
-          >Hi, I am Gustavo, but you may call me Gus. I am a man of certain
-          resources. Let us see if we can reach an agreement.</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text"
-          >Hi, I am Gustavo, but you may call me Gus. I am a man of certain
-          resources. Let us see if we can reach an agreement.</span
-        ><span class="td-dot">⬢</span>
-      </div>
-    </div>
-
-    <section id="dialogues" aria-labelledby="dialogues-title">
-      <div class="section-label sr-up">Iconic Lines</div>
-      <h2 id="dialogues-title" class="section-title sr-up">
-        Famous <span>Dialogues</span>
-      </h2>
-      <div class="divider sr-scale"></div>
-      <div class="dialogue-grid sr-up" id="dialogues-grid"></div>
-    </section>
-
-    <div class="ticker-divider td-rust">
-      <div class="ticker-track">
-        <span class="td-text"
-          >I did it for me. I was good at it. And I was... I was alive.</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text"
-          >I did it for me. I was good at it. And I was... I was alive.</span
-        ><span class="td-dot">⬢</span>
-        <span class="td-text"
-          >I did it for me. I was good at it. And I was... I was alive.</span
-        ><span class="td-dot">⬢</span>
-      </div>
-    </div>
-
-    <footer class="premium-footer">
-      <div class="footer-blueprint-grid"></div>
-
-      <div class="footer-main-container">
-        <div class="footer-grid-new">
-          <div class="footer-section brand-col">
-            <div class="footer-logo-premium">Breaking Bad</div>
-            <p class="footer-bio">
-              A story of transformation. A legacy of chemical perfection. The
-              definitive fan experience for television's greatest drama.
-            </p>
-            <div class="footer-location">
-              <span class="loc-dot"></span> Albuquerque, New Mexico
-            </div>
-          </div>
-
-          <div class="footer-section nav-col">
-            <h4 class="footer-title">Navigation</h4>
-            <ul class="footer-nav-list">
-              <li><a href="#seasons">Seasons</a></li>
-              <li><a href="#characters">Characters</a></li>
-              <li><a href="#awards">Awards</a></li>
-              <li><a href="#dialogues">Dialogues</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-section social-col">
-            <h4 class="footer-title">Network</h4>
-            <div class="social-grid-premium">
-              <a
-                href="https://x.com/Abhishek_madar_"
-                class="social-element-new element-x"
-                data-label="Twitter / X"
-              >
-                <span class="se-num">1</span>
-                <span class="se-sym">X</span>
-                <span class="se-mass">20.24</span>
-                <span class="se-cat">X</span>
-              </a>
-              <a
-                href="https://www.youtube.com/@abhishek_badagi_03"
-                class="social-element-new element-y"
-                data-label="YouTube"
-              >
-                <span class="se-num">39</span>
-                <span class="se-sym">Y</span>
-                <span class="se-mass">88.90</span>
-                <span class="se-cat">YouTube</span>
-              </a>
-              <a
-                href="https://www.instagram.com/abhishek_badagi_/"
-                class="social-element-new element-in"
-                data-label="Instagram"
-              >
-                <span class="se-num">49</span>
-                <span class="se-sym">In</span>
-                <span class="se-mass">114.8</span>
-                <span class="se-cat">Instagram</span>
-              </a>
-            </div>
-            <a
-              href="https://www.netflix.com/title/70143825"
-              target="_blank"
-              class="footer-watch-link"
-            >
-              <span class="fwl-play">▶</span> watch now
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-divider-premium"></div>
-
-        <div class="footer-bottom-new">
-          <div class="legal-wrap">
-            <span class="copyright">© 2026 Breaking Bad Experience</span>
-            <span class="legal-sep">|</span>
-            <span class="fan-project">A Professional Fan Project</span>
-          </div>
-
-          <div class="footer-actions">
-            <div class="heisenberg-signature">I’m the cook</div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-  </body>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
 </html>
