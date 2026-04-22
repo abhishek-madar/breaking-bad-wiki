@@ -1,0 +1,10 @@
+services:
+  - type: static
+    name: breaking-bad-fan-site
+    env: static
+    buildCommand: "" # No build step needed for this static project
+    publishPath: "." # Serve files from the root directory
+    headers:
+      - path: "/*"
+        name: Cache-Control
+        value: public, max-age=3600
